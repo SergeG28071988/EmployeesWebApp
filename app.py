@@ -31,7 +31,7 @@ def add_employee():
         name = request.form['name']
         position = request.form['position']
         salary = request.form['salary']
-        department = request.form['salary']
+        department = request.form['department']
 
         employee = Employee(name=name, position=position, salary=salary, department=department)
         try:
