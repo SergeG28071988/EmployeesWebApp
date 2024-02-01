@@ -21,7 +21,28 @@ class Employee(db.Model):
 @app.route('/')
 @app.route('/home')
 def index():
-    return render_template("index.html")
+    employees = Employee.query.all()
+    return render_template('index.html', employees=employees)
+
+
+@app.route('/add_employee', methods=['POST', 'GET'])
+def add_employee():
+    if request.method == 'POST':
+        name = request.form['name']
+        position = request.form['position']
+        salary = request.form['salary']
+        department = request.form['salary']
+
+        employee = Employee(name=name, position=position, salary=salary, department=department)
+        try:
+            db.session.add(employee)
+            db.session.commit()
+            return redirect(url_for('index'))
+        except:
+            return "При добавлении сотрудника произошла ошибка!!!"
+    else:
+        return render_template("add_employee.html")
+
 
 
 if __name__ == '__main__':   
