@@ -14,6 +14,9 @@ class Employee(db.Model):
     salary = db.Column(db.Float)
     department = db.Column(db.String(100))
 
+    def __repr__(self):
+        return f"Employee {self.id}"
+
 
 @app.route('/')
 @app.route('/home')
