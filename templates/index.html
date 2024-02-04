@@ -1,11 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сотрудники предприятия</title>
-</head>
-<body>
-    <h1>Сотрудники предприятия</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+Все Сотрудники
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container mt-5">
+  <h1 class="text-center">Все Сотрудники</h1><br>
+    {% if employees %}
+    <table class="table">
+        <thead>
+            <th>Имя</th>
+            <th>Должность</th>
+            <th>Зарплата</th>
+            <th>Отдел</th>            
+            <th>Детали о сотруднике</th>
+        </thead>
+        <tbody>
+            {% for employee in employees  %}            
+                <tr>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.position }}</td>
+                    <td>{{ employee.salary }}</td>
+                    <td>{{ employee.department }}</td>                    
+                    <td><a href="/employees/{{ employee.id }}" class="btn btn-warning">Подробнее</a></td>
+                </tr>                      
+            {% endfor %}
+        </tbody>
+    </table>
+   {% else %}
+        <p>Добро пожаловать!!!</p>
+   {% endif  %}
+</div>
+{% endblock %}

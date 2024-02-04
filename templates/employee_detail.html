@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ employee.department }}
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container mt-5">
+  <h1 class="text-center">{{ employee.department }}</h1><br>
+  <div class="alert alert-info">
+    <h1>{{ employee.name }} {{ employee.position }} {{ employee.salary }} </h1>   
+    <a href="/employees/{{ employee.id }}/delete" class="btn btn-danger">Удалить</a>  
+    <a href="/employees/{{ employee.id }}/update" class="btn btn-success">Изменить</a>  
+  </div>     
+
+{% endblock %}

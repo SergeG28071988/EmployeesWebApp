@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Изменить сотрудника
+
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container mt-5">
+    <h1 class="text-center">Изменить сотрудника</h1>
+    <form method="POST">
+          <label for="name">Имя:</label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="Введите имя" value="{{ employee.name }}" required>
+  
+          <label for="position">Должность:</label>
+          <input type="text" id="position" name="position" class="form-control" placeholder="Введите должность" value="{{ employee.position }}"required>
+  
+          <label for="salary">Оклад:</label>
+          <input type="number" id="salary" name="salary" class="form-control" placeholder="Введите оклад" value="{{ employee.salary }}" required>
+  
+          <label for="department">Отдел:</label>
+          <input type="text" id="department" name="department" class="form-control" placeholder="Введите отдел" value="{{ employee.department }}" required>
+  
+          <input type="submit" class="btn btn-success" value="Изменить сотрудника">
+      </form>
+  </div>
+  
+{% endblock %}

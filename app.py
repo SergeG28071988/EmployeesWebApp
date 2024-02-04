@@ -25,6 +25,13 @@ def index():
     return render_template('index.html', employees=employees)
 
 
+@app.route('/employees/<int:id>')
+def employee_detail(id):
+    employee = Employee.query.get(id)
+    return render_template("employee_detail.html", employee=employee)
+
+
+
 @app.route('/add_employee', methods=['POST', 'GET'])
 def add_employee():
     if request.method == 'POST':
@@ -42,6 +49,36 @@ def add_employee():
             return "При добавлении сотрудника произошла ошибка!!!"
     else:
         return render_template("add_employee.html")
+    
+
+@app.route('/employees/<int:id>/delete')
+def employee_delete(id):
+    employee = Employee.query.get_or_404(id)
+
+    try:
+        db.session.delete(employee)
+        db.session.commit()
+        return redirect(url_for('index'))
+    except:
+        return "При удалении сотрудника произошла ошибка!!!"
+
+
+@app.route('/employees/<int:id>/update', methods=['POST', 'GET'])
+def employee_update(id):
+    employee = Employee.query.get(id)
+    if request.method == 'POST':
+        employee.name = request.form['name']
+        employee.position = request.form['position']
+        employee.salary = request.form['salary']
+        employee.department = request.form['department']       
+        try:            
+            db.session.commit()
+            return redirect(url_for('index'))
+        except:
+            return "При изменении сотрудника произошла ошибка!!!"
+    else:
+        
+        return render_template("employee_update.html", employee=employee)    
 
 
 
